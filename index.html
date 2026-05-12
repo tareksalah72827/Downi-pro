@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Downi Pro - تحميل الوسائط باحتراف</title>
+  <meta name="description" content="Downi Pro - منصة احترافية لتحميل الوسائط المرخصة بجودة عالية" />
+  <meta name="theme-color" content="#0a0f1e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Downi Pro" />
+  <link rel="manifest" id="manifest-placeholder" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #050a18;
+      --bg-secondary: #0a1428;
+      --bg-tertiary: #0f1f3d;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-bg-hover: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.10);
+      --glass-border-strong: rgba(255, 255, 255, 0.18);
+      --glass-shadow: rgba(0, 0, 0, 0.5);
+      --accent-primary: #3b82f6;
+      --accent-secondary: #06b6d4;
+      --accent-tertiary: #8b5cf6;
+      --accent-glow: rgba(59, 130, 246, 0.3);
+      --text-primary: rgba(255, 255, 255, 0.95);
+      --text-secondary: rgba(255, 255, 255, 0.65);
+      --text-muted: rgba(255, 255, 255, 0.38);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --blur-sm: blur(12px);
+      --blur-md: blur(24px);
+      --blur-lg: blur(48px);
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --font-primary: 'Cairo', sans-serif;
+      --font-secondary: 'Tajawal', sans-serif;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f4ff;
+      --bg-secondary: #e8effe;
+      --bg-tertiary: #dde8ff;
+      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-bg-hover: rgba(255, 255, 255, 0.72);
+      --glass-border: rgba(255, 255, 255, 0.75);
+      --glass-border-strong: rgba(59, 130, 246, 0.25);
+      --glass-shadow: rgba(59, 130, 246, 0.12);
+      --accent-glow: rgba(59, 130, 246, 0.18);
+      --text-primary: rgba(10, 20, 50, 0.95);
+      --text-secondary: rgba(10, 20, 50, 0.65);
+      --text-muted: rgba(10, 20, 50, 0.40);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-primary);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+      position: relative;
+    }
+
+    /* ===== BACKGROUND ORBS ===== */
+    .bg-scene {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      animation: orbFloat 12s ease-in-out infinite alternate;
+    }
+
+    [data-theme="light"] .orb { opacity: 0.25; }
+
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, #1d4ed8 0%, transparent 70%);
+      top: -150px; right: -100px;
+      animation-duration: 14s;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+      bottom: -100px; left: -80px;
+      animation-duration: 18s;
+      animation-delay: -6s;
+    }
+    .orb-3 {
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, #0891b2 0%, transparent 70%);
+      top: 40%; left: 45%;
+      animation-duration: 22s;
+      animation-delay: -3s;
+    }
+    .orb-4 {
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, #2563eb 0%, transparent 70%);
+      top: 65%; right: 15%;
+      animation-duration: 16s;
+      animation-delay: -9s;
+    }
+
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.97); }
+      100% { transform: translate(15px, -25px) scale(1.03); }
+    }
+
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* ===== GLASS MIXIN ===== */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: var(--blur-md);
+      -webkit-backdrop-filter: var(--blur-md);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .glass-strong {
+      background: var(--glass-bg-hover);
+      backdrop-filter: var(--blur-lg);
+      -webkit-backdrop-filter: var(--blur-lg);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: 0 20px 60px var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    /* ===== LAYOUT ===== */
+    .app-wrapper {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--glass-bg);
+      backdrop-filter: var(--blur-md);
+      -webkit-backdrop-filter: var(--blur-md);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: 0 4px 20px var(--glass-shadow);
+      transition: var(--transition);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px var(--accent-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 50%;
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px 10px 50% 50%;
+    }
+
+    .logo-icon svg { position: relative; z-index: 1; }
+
+    .logo-text {
+      font-family: var(--font-secondary);
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    [data-theme="light"] .logo-text {
+      background: linear-gradient(135deg, #1d4ed8 0%, #0891b2 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .logo-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+      color: #fff;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+    .theme-toggle {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: var(--blur-sm);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-strong);
+      color: var(--text-primary);
+      transform: scale(1.05);
+    }
+
+    .install-btn {
+      padding: 8px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(59,130,246,0.4);
+      background: rgba(59,130,246,0.1);
+      color: var(--accent-primary);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition);
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .install-btn.visible { display: flex; }
+
+    .install-btn:hover {
+      background: rgba(59,130,246,0.2);
+      transform: translateY(-1px);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px 40px;
+      text-align: center;
+      animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      background: rgba(59,130,246,0.12);
+      border: 1px solid rgba(59,130,246,0.25);
+      color: var(--accent-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s both;
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-family: var(--font-secondary);
+      font-size: clamp(40px, 8vw, 80px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.15s both;
+      letter-spacing: -2px;
+    }
+
+    .title-gradient {
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.9) 40%, var(--accent-secondary) 70%, var(--accent-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="light"] .title-gradient {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 50%, #0891b2 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.75;
+      margin-bottom: 50px;
+      font-weight: 400;
+      animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s both;
+    }
+
+    /* ===== MAIN CARD ===== */
+    .main-card {
+      width: 100%;
+      max-width: 680px;
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.25s both;
+      background: var(--glass-bg);
+      backdrop-filter: var(--blur-lg);
+      -webkit-backdrop-filter: var(--blur-lg);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow:
+        0 32px 80px var(--glass-shadow),
+        0 0 0 1px rgba(255,255,255,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        inset 0 -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .main-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    }
+
+    .main-card::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== TYPE SELECTOR ===== */
+    .type-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .type-btn {
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-secondary);
+      font-family: var(--font-primary);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .type-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      transition: opacity 0.3s ease;
+    }
+
+    .type-btn span, .type-btn svg { position: relative; z-index: 1; }
+
+    .type-btn.active {
+      border-color: rgba(59,130,246,0.5);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+    }
+
+    .type-btn.active::before { opacity: 1; }
+
+    .type-btn:not(.active):hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-strong);
+      color: var(--text-primary);
+    }
+
+    /* ===== URL INPUT ===== */
+    .url-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .url-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    .url-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .url-input-icon {
+      position: absolute;
+      right: 16px;
+      color: var(--text-muted);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .url-input {
+      width: 100%;
+      padding: 16px 48px 16px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--glass-border);
+      background: rgba(0,0,0,0.25);
+      color: var(--text-primary);
+      font-family: var(--font-primary);
+      font-size: 15px;
+      font-weight: 400;
+      outline: none;
+      transition: var(--transition);
+      direction: ltr;
+      text-align: left;
+    }
+
+    [data-theme="light"] .url-input {
+      background: rgba(255,255,255,0.55);
+    }
+
+    .url-input::placeholder { color: var(--text-muted); }
+
+    .url-input:focus {
+      border-color: rgba(59,130,246,0.6);
+      background: rgba(0,0,0,0.35);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.15), 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    [data-theme="light"] .url-input:focus {
+      background: rgba(255,255,255,0.85);
+    }
+
+    .paste-btn {
+      position: absolute;
+      left: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      font-family: var(--font-primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .paste-btn:hover {
+      background: var(--glass-bg-hover);
+      color: var(--text-primary);
+    }
+
+    /* ===== QUALITY SELECTOR ===== */
+    .quality-section {
+      margin-bottom: 24px;
+    }
+
+    .quality-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .quality-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .quality-chip {
+      padding: 8px 16px;
+      border-radius: 50px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font-primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quality-chip.active {
+      border-color: rgba(59,130,246,0.5);
+      background: rgba(59,130,246,0.15);
+      color: var(--accent-primary);
+      box-shadow: 0 0 12px rgba(59,130,246,0.2);
+    }
+
+    .quality-chip:not(.active):hover {
+      border-color: var(--glass-border-strong);
+      background: var(--glass-bg-hover);
+      color: var(--text-primary);
+    }
+
+    /* ===== DOWNLOAD BUTTON ===== */
+    .download-btn {
+      width: 100%;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-secondary);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #06b6d4 100%);
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(59,130,246,0.4), 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .download-btn:hover::before { left: 100%; }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 48px rgba(59,130,246,0.5), 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .download-btn:active { transform: translateY(0); }
+
+    .download-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== PROGRESS ===== */
+    .progress-section {
+      margin-top: 24px;
+      display: none;
+    }
+
+    .progress-section.visible { display: block; animation: fadeInUp 0.4s ease; }
+
+    .progress-card {
+      border-radius: var(--radius-md);
+      padding: 20px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
+    }
+
+    [data-theme="light"] .progress-card { background: rgba(255,255,255,0.4); }
+
+    .progress-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .progress-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .status-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .status-icon.loading {
+      background: rgba(59,130,246,0.2);
+      border: 2px solid rgba(59,130,246,0.4);
+    }
+
+    .status-icon.success {
+      background: rgba(16,185,129,0.2);
+      border: 2px solid rgba(16,185,129,0.4);
+    }
+
+    .status-icon.error {
+      background: rgba(239,68,68,0.2);
+      border: 2px solid rgba(239,68,68,0.4);
+    }
+
+    .spinner {
+      width: 14px; height: 14px;
+      border: 2px solid rgba(59,130,246,0.3);
+      border-top-color: var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .progress-percent {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .progress-track {
+      height: 6px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    [data-theme="light"] .progress-track { background: rgba(0,0,0,0.08); }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 50px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      width: 0%;
+      transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 30px; height: 100%;
+      background: rgba(255,255,255,0.4);
+      filter: blur(4px);
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ===== RESULT CARD ===== */
+    .result-card {
+      margin-top: 16px;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.25);
+      display: none;
+      animation: fadeInUp 0.4s ease;
+    }
+
+    .result-card.visible { display: block; }
+
+    .result-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .result-link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.2);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .result-link-btn:hover {
+      background: rgba(16,185,129,0.2);
+      transform: translateX(-2px);
+    }
+
+    .link-quality-tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: rgba(16,185,129,0.2);
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    /* ===== ERROR CARD ===== */
+    .error-card {
+      margin-top: 16px;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.25);
+      display: none;
+      font-size: 14px;
+      color: var(--error);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .error-card.visible { display: block; animation: fadeInUp 0.4s ease; }
+
+    /* ===== PLATFORMS ===== */
+    .platforms-section {
+      width: 100%;
+      max-width: 680px;
+      margin-top: 40px;
+      animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.35s both;
+    }
+
+    .platforms-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .platforms-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .platform-tag {
+      padding: 6px 14px;
+      border-radius: 50px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .platform-tag:hover {
+      border-color: var(--glass-border-strong);
+      color: var(--text-secondary);
+    }
+
+    /* ===== FEATURES ===== */
+    .features-section {
+      width: 100%;
+      max-width: 900px;
+      margin: 60px auto 0;
+      padding: 0 20px;
+      animation: fadeInUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.4s both;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg);
+      backdrop-filter: var(--blur-sm);
+      -webkit-backdrop-filter: var(--blur-sm);
+      border: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-strong);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px var(--glass-shadow);
+    }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .feature-icon-1 { background: rgba(59,130,246,0.15); }
+    .feature-icon-2 { background: rgba(6,182,212,0.15); }
+    .feature-icon-3 { background: rgba(139,92,246,0.15); }
+    .feature-icon-4 { background: rgba(16,185,129,0.15); }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      margin-top: 80px;
+      padding: 40px 24px 32px;
+      border-top: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: var(--blur-sm);
+      -webkit-backdrop-filter: var(--blur-sm);
+      text-align: center;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .legal-notice {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.2);
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .legal-notice strong {
+      color: var(--warning);
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .footer-credits {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .footer-credits a {
+      color: var(--accent-secondary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .footer-credits a:hover { color: var(--accent-primary); }
+
+    .footer-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glass-border-strong), transparent);
+      margin: 16px auto;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .main-card { padding: 24px 18px; border-radius: var(--radius-lg); }
+      .hero { padding: 40px 16px 30px; }
+      .type-btn { padding: 12px 14px; font-size: 14px; }
+      .quality-chip { padding: 7px 13px; font-size: 12px; }
+      .download-btn { padding: 15px; font-size: 16px; }
+      .install-btn { font-size: 12px; padding: 7px 12px; }
+      .navbar { padding: 0 16px; }
+    }
+
+    @media (max-width: 400px) {
+      .logo-text { font-size: 18px; }
+      .hero-title { letter-spacing: -1px; }
+    }
+
+    /* ===== PWA INSTALL NOTIFICATION ===== */
+    .install-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      z-index: 1000;
+      width: calc(100% - 40px);
+      max-width: 380px;
+      padding: 16px 20px;
+      border-radius: var(--radius-lg);
+      background: var(--glass-bg-hover);
+      backdrop-filter: var(--blur-lg);
+      -webkit-backdrop-filter: var(--blur-lg);
+      border: 1px solid var(--glass-border-strong);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .install-toast.show { transform: translateX(-50%) translateY(0); }
+
+    .toast-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .toast-content { flex: 1; }
+    .toast-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .toast-subtitle { font-size: 12px; color: var(--text-secondary); }
+
+    .toast-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+    .toast-install-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .toast-install-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+    .toast-close-btn {
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .toast-close-btn:hover { color: var(--text-primary); }
+  </style>
+</head>
+<body>
+
+<div class="bg-scene">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+</div>
+<div class="noise-overlay"></div>
+
+<div class="app-wrapper">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L12 15M12 15L8 11M12 15L16 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 20H20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="logo-text">Downi</span>
+          <span class="logo-badge">PRO</span>
+        </div>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <button class="install-btn" id="installBtn" aria-label="تثبيت التطبيق">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2v13M12 15l-4-4M12 15l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        تثبيت التطبيق
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
+        <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+          <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <main class="hero">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <span>منصة تحميل وسائط متقدمة</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="title-gradient">Downi Pro</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      حمّل الوسائط المرخصة بأعلى جودة ممكنة من مختلف المنصات المدعومة.<br/>سرعة فائقة، واجهة ذكية، وتجربة استخدام لا مثيل لها.
+    </p>
+
+    <!-- MAIN CARD -->
+    <div class="main-card">
+
+      <!-- TYPE SELECTOR -->
+      <div class="type-selector">
+        <button class="type-btn active" id="videoBtn" onclick="selectType('video')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 9l5 3-5 3V9z" fill="currentColor"/>
+          </svg>
+          <span>تحميل فيديو</span>
+        </button>
+        <button class="type-btn" id="audioBtn" onclick="selectType('audio')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
+            <circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <span>تحميل صوت</span>
+        </button>
+      </div>
+
+      <!-- URL INPUT -->
+      <div class="url-group">
+        <label class="url-label">رابط المحتوى</label>
+        <div class="url-input-wrap">
+          <div class="url-input-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <input
+            type="url"
+            class="url-input"
+            id="urlInput"
+            placeholder="https://www.youtube.com/watch?v=..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="paste-btn" onclick="pasteUrl()">لصق</button>
+        </div>
+      </div>
+
+      <!-- QUALITY SELECTOR -->
+      <div class="quality-section">
+        <label class="quality-label" id="qualityLabel">جودة الفيديو</label>
+        <div class="quality-grid" id="videoQualities">
+          <button class="quality-chip" onclick="selectQuality(this, '4K')">4K</button>
+          <button class="quality-chip active" onclick="selectQuality(this, '1080p')">1080p HD</button>
+          <button class="quality-chip" onclick="selectQuality(this, '720p')">720p</button>
+          <button class="quality-chip" onclick="selectQuality(this, '480p')">480p</button>
+          <button class="quality-chip" onclick="selectQuality(this, '360p')">360p</button>
+        </div>
+        <div class="quality-grid" id="audioQualities" style="display:none;">
+          <button class="quality-chip active" onclick="selectQuality(this, '320kbps')">320 kbps</button>
+          <button class="quality-chip" onclick="selectQuality(this, '256kbps')">256 kbps</button>
+          <button class="quality-chip" onclick="selectQuality(this, '192kbps')">192 kbps</button>
+          <button class="quality-chip" onclick="selectQuality(this, '128kbps')">128 kbps</button>
+        </div>
+      </div>
+
+      <!-- DOWNLOAD BUTTON -->
+      <button class="download-btn" id="downloadBtn" onclick="startDownload()">
+        <div class="btn-inner" id="btnInner">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2v13M12 15l-4-4M12 15l4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 19h18" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span id="btnText">بدء التحميل</span>
+        </div>
+      </button>
+
+      <!-- PROGRESS -->
+      <div class="progress-section" id="progressSection">
+        <div class="progress-card">
+          <div class="progress-header">
+            <div class="progress-status">
+              <div class="status-icon loading" id="statusIcon">
+                <div class="spinner" id="statusSpinner"></div>
+              </div>
+              <span id="statusText">جارٍ تحليل الرابط...</span>
+            </div>
+            <span class="progress-percent" id="progressPercent">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-meta">
+            <span id="progressStep">الاتصال بالخوادم...</span>
+            <span id="progressSize"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULT CARD -->
+      <div class="result-card" id="resultCard">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 4L12 14.01l-3-3" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span style="font-size:14px;font-weight:700;color:#10b981;">تم الحصول على روابط التحميل</span>
+        </div>
+        <div class="result-links" id="resultLinks"></div>
+      </div>
+
+      <!-- ERROR CARD -->
+      <div class="error-card" id="errorCard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline-block;vertical-align:middle;margin-left:6px;">
+          <circle cx="12" cy="12" r="10" stroke="#ef4444" stroke-width="2"/>
+          <line x1="12" y1="8" x2="12" y2="12" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="16" r="1" fill="#ef4444"/>
+        </svg>
+        <span id="errorMsg">حدث خطأ. يُرجى التحقق من الرابط والمحاولة مرة أخرى.</span>
+      </div>
+    </div>
+
+    <!-- PLATFORMS -->
+    <div class="platforms-section">
+      <p class="platforms-title">المنصات المدعومة</p>
+      <div class="platforms-grid">
+        <span class="platform-tag">YouTube</span>
+        <span class="platform-tag">Twitter / X</span>
+        <span class="platform-tag">Facebook</span>
+        <span class="platform-tag">Instagram</span>
+        <span class="platform-tag">TikTok</span>
+        <span class="platform-tag">Vimeo</span>
+        <span class="platform-tag">Dailymotion</span>
+        <span class="platform-tag">SoundCloud</span>
+        <span class="platform-tag">روابط مباشرة</span>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="features-section">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-1">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="feature-title">سرعة فائقة</div>
+          <div class="feature-desc">نستخدم خوادم متعددة موزعة جغرافياً لضمان أسرع سرعة تحميل ممكنة.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-2">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="4" stroke="#06b6d4" stroke-width="2"/>
+              <path d="M9 12l2 2 4-4" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="feature-title">جودة عالية</div>
+          <div class="feature-desc">دعم كامل لجودات متعددة تصل إلى 4K وصوت بجودة 320kbps.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-3">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="feature-title">آمن وموثوق</div>
+          <div class="feature-desc">لا يتم تخزين أي بيانات أو روابط. خصوصيتك محمية بالكامل.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="2" width="14" height="20" rx="3" stroke="#10b981" stroke-width="2"/>
+              <path d="M9 7h6M9 11h6M9 15h4" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="feature-title">متعدد المنصات</div>
+          <div class="feature-desc">يدعم أكثر من 50 منصة للوسائط حول العالم.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <div class="logo-icon" style="width:32px;height:32px;border-radius:9px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L12 15M12 15L8 11M12 15L16 11" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 20H20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span style="font-family:var(--font-secondary);font-weight:800;font-size:18px;background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Downi Pro</span>
+    </div>
+
+    <div class="legal-notice">
+      <strong>تنبيه قانوني وأخلاقي هام</strong>
+      يُرجى استخدام هذه الأداة فقط في تحميل المحتوى المصرَّح به قانونياً أو المملوك لكم، والالتزام بحقوق النشر وشروط الاستخدام الخاصة بكل منصة. ولا يُسمح باستخدامها في أي عمل مخالف لشرع الله تعالى أو لحقوق الآخرين.
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-credits">
+      <div>حقوق التطوير محفوظة لـ <strong>Tariq</strong> &copy; 2025</div>
+      <div style="margin-top:6px;">
+        للتواصل عبر واتساب:
+        <a href="https://wa.me/201019667530" target="_blank" rel="noopener">+201019667530</a>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:var(--text-muted);">
+        Downi Pro v2.0 &mdash; جميع الحقوق محفوظة
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- INSTALL TOAST -->
+<div class="install-toast" id="installToast">
+  <div class="toast-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2v13M12 15l-4-4M12 15l4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M3 19h18" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="toast-content">
+    <div class="toast-title">ثبّت Downi Pro</div>
+    <div class="toast-subtitle">أضفه إلى شاشتك الرئيسية للوصول السريع</div>
+  </div>
+  <div class="toast-actions">
+    <button class="toast-install-btn" id="toastInstallBtn">تثبيت</button>
+    <button class="toast-close-btn" onclick="closeToast()">X</button>
+  </div>
+</div>
+
+<script>
+  /* ===== STATE ===== */
+  let currentType = 'video';
+  let currentQuality = '1080p';
+  let deferredPrompt = null;
+  let isDownloading = false;
+
+  /* ===== THEME ===== */
+  const html = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+
+  function getSystemTheme() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  let currentTheme = localStorage.getItem('downi-theme') || getSystemTheme();
+  html.setAttribute('data-theme', currentTheme);
+
+  function updateThemeIcon(theme) {
+    const icon = document.getElementById('themeIcon');
+    if (theme === 'dark') {
+      icon.innerHTML = `<circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`;
+    } else {
+      icon.innerHTML = `<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    }
+  }
+
+  updateThemeIcon(currentTheme);
+
+  themeToggle.addEventListener('click', () => {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('downi-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+  });
+
+  /* ===== TYPE SELECTOR ===== */
+  function selectType(type) {
+    currentType = type;
+    document.getElementById('videoBtn').classList.toggle('active', type === 'video');
+    document.getElementById('audioBtn').classList.toggle('active', type === 'audio');
+    document.getElementById('videoQualities').style.display = type === 'video' ? 'flex' : 'none';
+    document.getElementById('audioQualities').style.display = type === 'audio' ? 'flex' : 'none';
+    document.getElementById('qualityLabel').textContent = type === 'video' ? 'جودة الفيديو' : 'جودة الصوت';
+    const placeholder = document.getElementById('urlInput');
+    if (type === 'audio') {
+      placeholder.placeholder = 'https://soundcloud.com/artist/track...';
+    } else {
+      placeholder.placeholder = 'https://www.youtube.com/watch?v=...';
+    }
+    resetState();
+  }
+
+  /* ===== QUALITY SELECTOR ===== */
+  function selectQuality(el, quality) {
+    currentQuality = quality;
+    const container = el.closest('.quality-grid');
+    container.querySelectorAll('.quality-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  /* ===== PASTE ===== */
+  async function pasteUrl() {
+    try {
+      const text = await navigator.clipboard.readText();
+      document.getElementById('urlInput').value = text;
+    } catch {
+      document.getElementById('urlInput').focus();
+    }
+  }
+
+  /* ===== RESET ===== */
+  function resetState() {
+    document.getElementById('progressSection').classList.remove('visible');
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('errorCard').classList.remove('visible');
+    document.getElementById('progressFill').style.width = '0%';
+    document.getElementById('progressPercent').textContent = '0%';
+    isDownloading = false;
+    document.getElementById('downloadBtn').disabled = false;
+    document.getElementById('btnText').textContent = 'بدء التحميل';
+  }
+
+  /* ===== DOWNLOAD SIMULATION / REAL API ===== */
+  async function startDownload() {
+    const url = document.getElementById('urlInput').value.trim();
+    if (!url) {
+      shakeInput();
+      return;
+    }
+
+    if (!isValidUrl(url)) {
+      showError('الرابط المدخل غير صالح. يُرجى إدخال رابط URL صحيح.');
+      return;
+    }
+
+    if (isDownloading) return;
+    isDownloading = true;
+
+    resetUI();
+
+    document.getElementById('progressSection').classList.add('visible');
+    document.getElementById('downloadBtn').disabled = true;
+    document.getElementById('btnText').textContent = 'جارٍ المعالجة...';
+
+    await simulateProgress();
+  }
+
+  function isValidUrl(string) {
+    try {
+      const u = new URL(string);
+      return u.protocol === 'http:' || u.protocol === 'https:';
+    } catch {
+      return false;
+    }
+  }
+
+  function resetUI() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('errorCard').classList.remove('visible');
+    document.getElementById('progressFill').style.width = '0%';
+    document.getElementById('progressPercent').textContent = '0%';
+    document.getElementById('resultLinks').innerHTML = '';
+  }
+
+  async function simulateProgress() {
+    const steps = [
+      { pct: 10, text: 'الاتصال بالخوادم المتقدمة...', step: 'جارٍ التحليل' },
+      { pct: 25, text: 'استخراج معلومات الوسائط...', step: 'قراءة البيانات' },
+      { pct: 45, text: 'معالجة تدفقات الجودة المتاحة...', step: 'تحديد الجودات' },
+      { pct: 65, text: 'تحسين رابط التحميل...', step: 'تجهيز الرابط' },
+      { pct: 85, text: 'التحقق من صحة الملف...', step: 'التحقق النهائي' },
+      { pct: 100, text: 'تم بنجاح!', step: 'مكتمل' },
+    ];
+
+    for (const s of steps) {
+      await sleep(600 + Math.random() * 400);
+      setProgress(s.pct, s.text, s.step);
+    }
+
+    await sleep(400);
+    showResults();
+  }
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function setProgress(pct, statusText, stepText) {
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPercent').textContent = pct + '%';
+    document.getElementById('statusText').textContent = statusText;
+    document.getElementById('progressStep').textContent = stepText;
+  }
+
+  function showResults() {
+    const statusIcon = document.getElementById('statusIcon');
+    statusIcon.classList.remove('loading');
+    statusIcon.classList.add('success');
+    statusIcon.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+    document.getElementById('statusText').textContent = 'جاهز للتحميل';
+
+    const resultCard = document.getElementById('resultCard');
+    const resultLinks = document.getElementById('resultLinks');
+    resultCard.classList.add('visible');
+
+    const url = document.getElementById('urlInput').value.trim();
+
+    let qualities = [];
+    if (currentType === 'video') {
+      qualities = [
+        { label: 'جودة ' + currentQuality + ' (موصى به)', quality: currentQuality, format: 'MP4' },
+        { label: 'جودة 720p', quality: '720p', format: 'MP4' },
+        { label: 'جودة 480p', quality: '480p', format: 'MP4' },
+      ];
+    } else {
+      qualities = [
+        { label: 'جودة ' + currentQuality + ' (موصى به)', quality: currentQuality, format: 'MP3' },
+        { label: 'جودة 192kbps', quality: '192kbps', format: 'MP3' },
+        { label: 'جودة 128kbps', quality: '128kbps', format: 'MP3' },
+      ];
+    }
+
+    resultLinks.innerHTML = '';
+    qualities.forEach((q, i) => {
+      const btn = document.createElement('a');
+      btn.className = 'result-link-btn';
+      btn.href = '#';
+      btn.innerHTML = `
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2v13M12 15l-4-4M12 15l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 19h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>${q.label}</span>
+        </div>
+        <span class="link-quality-tag">${q.format}</span>
+      `;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        handleDownloadLink(url, q.quality, currentType);
+      });
+      resultLinks.appendChild(btn);
+    });
+
+    document.getElementById('downloadBtn').disabled = false;
+    document.getElementById('btnText').textContent = 'تحميل جديد';
+    isDownloading = false;
+
+    document.getElementById('downloadBtn').onclick = () => {
+      resetState();
+      document.getElementById('urlInput').value = '';
+      document.getElementById('downloadBtn').onclick = startDownload;
+    };
+  }
+
+  function handleDownloadLink(url, quality, type) {
+    const apis = [
+      `https://api.vevioz.com/api/button/videos/${encodeURIComponent(url)}`,
+      `https://y2mate.com/youtube/${encodeURIComponent(url)}`,
+    ];
+
+    const notice = document.createElement('div');
+    notice.style.cssText = 'font-size:12px;color:var(--text-muted);text-align:center;margin-top:8px;';
+    notice.textContent = 'جارٍ فتح رابط التحميل...';
+
+    if (type === 'video') {
+      const ytMatch = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+      if (ytMatch) {
+        const videoId = ytMatch[1];
+        window.open(`https://www.y2mate.com/youtube/${videoId}`, '_blank', 'noopener');
+        return;
+      }
+    }
+
+    window.open(`https://api.vevioz.com/api/button/videos/${encodeURIComponent(url)}`, '_blank', 'noopener');
+  }
+
+  function showError(msg) {
+    document.getElementById('errorCard').classList.add('visible');
+    document.getElementById('errorMsg').textContent = msg;
+    document.getElementById('progressSection').classList.remove('visible');
+    document.getElementById('downloadBtn').disabled = false;
+    document.getElementById('btnText').textContent = 'بدء التحميل';
+    isDownloading = false;
+  }
+
+  function shakeInput() {
+    const input = document.getElementById('urlInput');
+    input.style.animation = 'none';
+    input.style.borderColor = 'rgba(239,68,68,0.6)';
+    input.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.15)';
+    setTimeout(() => {
+      input.style.borderColor = '';
+      input.style.boxShadow = '';
+    }, 1500);
+    input.focus();
+  }
+
+  /* ===== PWA ===== */
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBtn').classList.add('visible');
+    setTimeout(() => {
+      document.getElementById('installToast').classList.add('show');
+    }, 3000);
+  });
+
+  document.getElementById('installBtn').addEventListener('click', triggerInstall);
+  document.getElementById('toastInstallBtn').addEventListener('click', triggerInstall);
+
+  async function triggerInstall() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    document.getElementById('installBtn').classList.remove('visible');
+    closeToast();
+  }
+
+  function closeToast() {
+    document.getElementById('installToast').classList.remove('show');
+  }
+
+  window.addEventListener('appinstalled', () => {
+    document.getElementById('installBtn').classList.remove('visible');
+    closeToast();
+  });
+
+  /* ===== SERVICE WORKER (INLINE) ===== */
+  if ('serviceWorker' in navigator) {
+    const swCode = `
+      const CACHE = 'downi-pro-v1';
+      const ASSETS = ['/'];
+      self.addEventListener('install', e => {
+        e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+        self.skipWaiting();
+      });
+      self.addEventListener('activate', e => {
+        e.waitUntil(caches.keys().then(keys =>
+          Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+        ));
+        self.clients.claim();
+      });
+      self.addEventListener('fetch', e => {
+        e.respondWith(
+          caches.match(e.request).then(r => r || fetch(e.request))
+        );
+      });
+    `;
+    const blob = new Blob([swCode], { type: 'application/javascript' });
+    const swUrl = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(swUrl).catch(() => {});
+  }
+
+  /* ===== MANIFEST (INLINE) ===== */
+  const manifest = {
+    name: 'Downi Pro',
+    short_name: 'Downi Pro',
+    description: 'منصة تحميل وسائط احترافية',
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#050a18',
+    theme_color: '#0a0f1e',
+    orientation: 'portrait-primary',
+    icons: [
+      {
+        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='url(%23g)'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231d4ed8'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M96 44v76M96 120l-30-30M96 120l30-30' stroke='white' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M44 152h104' stroke='white' stroke-width='14' stroke-linecap='round'/%3E%3C/svg%3E",
+        sizes: '192x192',
+        type: 'image/svg+xml',
+        purpose: 'any maskable'
+      },
+      {
+        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='url(%23g)'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231d4ed8'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M256 100v224M256 324l-80-80M256 324l80-80' stroke='white' stroke-width='36' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M100 412h312' stroke='white' stroke-width='36' stroke-linecap='round'/%3E%3C/svg%3E",
+        sizes: '512x512',
+        type: 'image/svg+xml',
+        purpose: 'any maskable'
+      }
+    ]
+  };
+  const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+  const manifestUrl = URL.createObjectURL(manifestBlob);
+  document.getElementById('manifest-placeholder').href = manifestUrl;
+
+  /* ===== ENTER KEY ===== */
+  document.getElementById('urlInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') startDownload();
+  });
+
+  /* ===== CLEAR ERROR ON INPUT ===== */
+  document.getElementById('urlInput').addEventListener('input', () => {
+    document.getElementById('errorCard').classList.remove('visible');
+  });
+</script>
+</body>
+</html>
